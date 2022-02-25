@@ -4,8 +4,8 @@ export class Branch {
         this.startY = startY;
         this.endX = endX;
         this.endY = endY;
-        this.baseColor = baseColor;
-        this.frame =  10 - cntDepth < 1 ? 1 : 10 - cntDepth;
+        this.baseColor = '';
+        this.frame =  30 - cntDepth < 1 ? 1 : 10 - cntDepth;
         this.lineWidth = depth - cntDepth;
         this.cntFrame = 0; // 현재 프레임
         this.cntDepth = cntDepth; // 현재 깊이
@@ -38,7 +38,7 @@ export class Branch {
             colorDepth = 6;
         }
 
-        this.color = 'rgb('+this.baseColor.replace(/0/g, opacity[colorDepth])+')';
+        this.color = 'rgb('+baseColor.replace(/0/g, opacity[colorDepth])+')';
     }
 
     draw(ctx) {
@@ -68,11 +68,11 @@ export class Branch {
         ctx.moveTo(this.startX, this.startY); // 선 시작 지점
         ctx.lineTo(this.currentX, this.currentY); // 선 끝 지점
 
-        if (this.cntDepth != this.depth -1){
+        if (this.cntDepth != (this.depth - 2)){
             ctx.fillStyle = this.color;
             ctx.strokeStyle = this.color;
             ctx.stroke();
-        }else {
+        } else {
             ctx.ellipse(this.currentX, this.currentY, this.random(2,3), this.random(4,6), this.random(0,180), 0, Math.PI*2);
             ctx.fill();
         }
