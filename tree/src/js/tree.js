@@ -7,7 +7,6 @@ export class Tree {
         this.posY = posY;
         this.branches = [];
         this.depth = 11;
-
         this.cntDepth = 0; // 현재 depth
         this.animation = null; // 현재 애니메이션
 
@@ -20,6 +19,11 @@ export class Tree {
             this.branches.push([]);
         }
 
+        // 컬러
+        let color = ['255,0,0', '0,255,0', '0,0,255', '255,255,0', '255,0,255', '0,255,255'];
+        this.baseColor = color[this.random(0, color.length)];
+
+
         // 시작 각도는 -90도로 해서 나무 기둥이 자라도록함, 시작 depth = 0
         this.createBranch(this.posX, this.posY, -90,0);
         this.draw(this.ctx);
@@ -29,7 +33,7 @@ export class Tree {
         if (depth  == this.depth) return;
 
         // 가지의 길이를 랜덤으로
-        const len = depth === 0 ? this.random(10, 13) : this.random(0, 11);
+        const len = depth === 0 ? this.random(11, 14) : this.random(0, 12);
 
         // depth 를 역으로 곱해줘 점차 짧게
         const endX = startX + this.cos(angle) * len * (this.depth - depth);
@@ -37,10 +41,10 @@ export class Tree {
 
         // depth 에 해당하는 위치에 배열 추가
         // this.depth - depth = 선 두께를 점차 가늘게
-        this.branches[depth].push(new Branch(startX, startY, endX, endY, depth, this.depth));
+        this.branches[depth].push(new Branch(startX, startY, endX, endY, depth, this.depth, this.baseColor));
 
-        this.createBranch(endX, endY, angle - this.random(15, 23), depth+1);
-        this.createBranch(endX, endY, angle + this.random(15, 23), depth+1);
+        this.createBranch(endX, endY, angle - this.random(15, 22), depth+1);
+        this.createBranch(endX, endY, angle + this.random(15, 22), depth+1);
     }
 
     draw() {
@@ -53,7 +57,6 @@ export class Tree {
             // 0 depth 일 수 있으니 true로 시작
             let pass = true;
             for (let j = 0; j < this.branches[i].length; j++){
-                console.log(this.branches[i][j]);
                 pass = this.branches[i][j].draw(this.ctx);
             }
             if(!pass) break
@@ -77,6 +80,5 @@ export class Tree {
 
     random(min, max){
         return min + Math.floor(Math.random() * (max - min + 1));
-
     }
 }
