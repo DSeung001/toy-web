@@ -1,0 +1,10 @@
+https://velog.io/@kimbyungchan/canvas-animation
+
+위 링크
+shapes 라는 배열에다 Circle을 하나 생성한뒤에
+frameRequest함수에서 update, render를 호출해줬습니다.
+아래 그림처럼 Circle이 나오게 됩니다.
+
+이 문구 위까지 해둠,
+그러나 타입스크립트를 웹으로 띄우는 법을 몰라
+타입스크립트 공부 후 실행
