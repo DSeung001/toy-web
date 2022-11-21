@@ -1,8 +1,7 @@
 <h3>아무거나 모아두는 곳</h3>
 
 <hr/>
-[나무그리기] <br/>
-- (https://dseung001.github.io/toy_web/tree/)  <br/>
+[tree] <br/>
 - 클릭하면 나무가 자라나요 <br/>
 <hr/>
 [chat] <br/>
