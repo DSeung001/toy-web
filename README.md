@@ -2,7 +2,7 @@
 
 <hr/>
 [나무그리기] <br/>
-- (https://seungr.github.io/web-art/tree/)  <br/>
+- (https://seungr.github.io/toy_web/tree/)  <br/>
 - 클릭하면 나무가 자라나요 <br/>
 <hr/>
 [chat] <br/>
