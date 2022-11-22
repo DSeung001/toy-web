@@ -1,10 +1,10 @@
 export class Branch {
+    // 시작 x 좌표, 시작 y좌표, 끝 x 좌표, 끝 y 좌표, 현재 나무가지 깊이, 전체 깊이
     constructor(startX, startY, endX, endY, cntDepth, depth, baseColor) {
         this.startX = startX;
         this.startY = startY;
         this.endX = endX;
         this.endY = endY;
-        this.baseColor = '';
         this.frame =  30 - cntDepth < 1 ? 1 : 10 - cntDepth;
         this.lineWidth = depth - cntDepth;
         this.cntFrame = 0; // 현재 프레임
@@ -22,6 +22,7 @@ export class Branch {
         let opacity = [255,200,160,120,80,40,0];
         let colorDepth = 0;
 
+        // 나무가지 depth 별 투명도 부여
         if (cntDepth == 0) {
             colorDepth = 0
         } else if (cntDepth < 3) {
@@ -47,10 +48,11 @@ export class Branch {
 
         ctx.beginPath();
 
-        // 구간별 길이를 더해서
+        // depth 별 길이를 더함, 현재 좌표 파악
         this.currentX += this.gapX;
         this.currentY += this.gapY;
-
+        
+        // depth 별 굵기 지정
         if (this.lineWidth < 3) {
             ctx.lineWidth = this.lineWidth * 0.3;
         } else if (this.lineWidth < 5){
@@ -69,10 +71,12 @@ export class Branch {
         ctx.lineTo(this.currentX, this.currentY); // 선 끝 지점
 
         if (this.cntDepth != (this.depth - 2)){
+            // 끝이 아니면 가지 생성
             ctx.fillStyle = this.color;
             ctx.strokeStyle = this.color;
             ctx.stroke();
         } else {
+            // 끝 depth 일 경우 나뭇잎 생성
             ctx.ellipse(this.currentX, this.currentY, this.random(2,3), this.random(4,6), this.random(0,180), 0, Math.PI*2);
             ctx.fill();
         }

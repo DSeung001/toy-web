@@ -11,11 +11,14 @@ class App{
         // Retina 디스플레이(애플이 정의한 고화질 디스플레이어)를 위한 컨버스의 사이즈 비율 세팅
         this.pixelRatio = window.devicePixelRatio > 1 ? 2 : 1;
 
+        // 이벤트 등록
         window.addEventListener('resize', this.resize.bind(this), false);
         window.addEventListener('click', this.click.bind(this), false);
 
+        // 현재 사이즈 적용
         this.resize();
 
+        // 처음 화면 접속시 화면 가운데에 트리 생성
         new Tree(this.ctx, this.stageWidth/2, this.stageHeight);
     }
 
@@ -37,6 +40,7 @@ class App{
     }
 
     click(event) {
+        // 마우스가 클릭한 x 좌표로 트리 생성
         const {clientX} = event;
         new Tree(this.ctx, clientX, this.stageHeight);
     }

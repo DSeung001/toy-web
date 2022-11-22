@@ -1,31 +1,31 @@
 import { Branch } from "./branch.js";
 
 export class Tree {
+    // context, x 좌표, y 좌표
     constructor(ctx, posX, posY){
         this.ctx = ctx;
         this.posX = posX
         this.posY = posY;
         this.branches = [];
-        this.depth = 11;
+        this.depth = this.random(9,11); // 나무가지 갯수
         this.cntDepth = 0; // 현재 depth
         this.animation = null; // 현재 애니메이션
-
         this.init();
     }
 
     init() {
-        // depth 별로 가지를 저장하기 위해 branches 에 depth 만큼 빈 배열 추가
+        // depth 만큼 나무가지 배열 초기화
         for (let i = 0; i < this.depth; i++){
             this.branches.push([]);
         }
 
-        // 컬러
+        // 나무 색 랜덤
         let color = ['255,0,0', '0,255,0', '0,0,255', '255,255,0', '255,0,255', '0,255,255'];
         this.baseColor = color[this.random(0, color.length)];
 
-
         // 시작 각도는 -90도로 해서 나무 기둥이 자라도록함, 시작 depth = 0
         this.createBranch(this.posX, this.posY, -90,0);
+        // 나무 생성 애니메이션화
         this.draw(this.ctx);
     }
 
@@ -43,8 +43,9 @@ export class Tree {
         // this.depth - depth = 선 두께를 점차 가늘게
         this.branches[depth].push(new Branch(startX, startY, endX, endY, depth, this.depth, this.baseColor));
 
+        // 다음 나무가지 생성
         this.createBranch(endX, endY, angle - this.random(15, 22), depth+1);
-        this.createBranch(endX, endY, angle + this.random(15, 22), depth+1);
+        this.createBranch(endX, endY, angle + this.random(15, 25), depth+1);
     }
 
     draw() {
@@ -53,17 +54,19 @@ export class Tree {
             cancelAnimationFrame(this.animate);
         }
 
+        // 나무 그리기 루프
         for (let i = this.cntDepth; i < this.branches.length; i++){
-            // 0 depth 일 수 있으니 true로 시작
             let pass = true;
             for (let j = 0; j < this.branches[i].length; j++){
+                // 생성해둔 branch 에서 그리기 작업 실행
                 pass = this.branches[i][j].draw(this.ctx);
             }
             if(!pass) break
             this.cntDepth++;
         }
 
-        // 마지막에 requestAnimationFrame 실행함으로써 branch 들의 draw 를 프레임화하여 애니메이션으로 만들어 줌
+        // requestAnimationFrame
+        // draw 를 프레임화하여 애니메이션으로 만들어 줌
         this.animation = requestAnimationFrame(this.draw.bind(this));
     }
 
@@ -77,7 +80,6 @@ export class Tree {
     degToRad(angle){
         return (angle / 180.0) * Math.PI;
     }
-
     random(min, max){
         return min + Math.floor(Math.random() * (max - min + 1));
     }
