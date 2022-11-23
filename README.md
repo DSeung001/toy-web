@@ -12,4 +12,4 @@
 <hr/>
 [tetris] <br/>
 - 테트리스 
-- https://dseung001.github.io/toy_web/tetris/
+- https://dseung001.github.io/toy-web/tetris/
