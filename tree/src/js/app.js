@@ -8,8 +8,9 @@ class App{
 
         // context 생성
         this.ctx = this.canvas.getContext('2d');
-        // Retina 디스플레이(애플이 정의한 고화질 디스플레이어)를 위한 컨버스의 사이즈 비율 세팅
-        this.pixelRatio = window.devicePixelRatio > 1 ? 2 : 1;
+        // Retina 디스플레이(애플이 정의한 고화질 디스플레이어)를 위한 컨버스의 사이즈 비율 세팅, 맥북에서 작동 안함
+        // this.pixelRatio = window.devicePixelRatio > 1 ? 2 : 1;
+        this.pixelRatio = 1;
 
         // 이벤트 등록
         window.addEventListener('resize', this.resize.bind(this), false);
